@@ -21,8 +21,12 @@ module.exports = async (res, url) => {
     const page = await browser.newPage();
     await page.goto(url);
     await page.pdf({ path: PDFPath, format: "A4" });
-    res.json({ PDF: PDFPath });
+    console.log('Done converting to PDF.')
+    console.log({PDFPath})
+    // res.json({ PDF: PDFPath });
+    res.download(PDFPath);
   } catch (error) {
+    console.log({ error });
     res.send(`Something went wrong while running Puppeteer: ${error}`);
   } finally {
     await browser.close();
