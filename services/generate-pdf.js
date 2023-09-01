@@ -5,7 +5,7 @@ module.exports = async (url) => {
   const PDFPath = path.resolve(__dirname, "../files/output.pdf")
 
 
-  const browser = await puppeteer.launch({ headless: true });
+  const browser = await puppeteer.launch({ headless: 'new' });
   const page = await browser.newPage();
   await page.goto(url);
   await page.pdf({ path: PDFPath, format: "A4" });

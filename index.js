@@ -10,8 +10,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 const _PORT_ = 8080;
 
 app.get("/", async (_, res) => {
- 
-  res.send(`Welcome to Puppeteer website to pdf generator, to generate a new pdf from a url kinfly navigate to the /generator POST with your url and the only body param.`);
+  res.send(`Welcome to Puppeteer website to pdf generator, to generate a new PDF from a URL, kindly navigate to the /generate-pdf route with POST method and your url as the body param.`);
 });
 
 app.post("/generate-pdf", async (req, res) => {
