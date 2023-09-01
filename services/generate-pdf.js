@@ -1,10 +1,9 @@
 require("dotenv").config();
 const fs = require("fs");
 const puppeteer = require("puppeteer");
+const { uploadToFirebase } = require("./uploadFileToFirebase");
 
 module.exports = async (res, url) => {
-  const filePath = "output.pdf";
-
   const browser = await puppeteer.launch({
     args: [
       "--disable-setuid-sandbox",
@@ -22,9 +21,12 @@ module.exports = async (res, url) => {
     await page.goto(url);
     const pdf = await page.pdf({ format: "A1" });
 
-    fs.writeFileSync(filePath, pdf);
+    // fs.writeFileSync(filePath, pdf);
 
-    res.download(filePath)
+   const newUrl = await uploadToFirebase(pdf)
+
+    // res.download(filePath)
+    res.send(newUrl)
   } catch (error) {
     console.log({ error });
     res.send(`Something went wrong while running Puppeteer: ${error}`);

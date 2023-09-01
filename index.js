@@ -9,16 +9,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 const _PORT_ = 8080;
 
-app.get("/",  async (_, res) => {
-  res.send('Welcome, convert your website to pdf.')
+app.get("/", async (_, res) => {
+  res.send("Welcome, convert your website to pdf.");
 });
 
-
-app.get("/:domain",  async (req, res) => {
-  const url = 'https://' + req.params.domain + '.com/'
-  await generatePdf(res, url)
+app.get("/:domain", async (req, res) => {
+  const url = "https://" + req.params.domain + ".com/";
+  await generatePdf(res, url);
 });
-
 
 app.post("/generate-pdf", async (req, res) => {
   await generatePdf(res, req.body.url);
