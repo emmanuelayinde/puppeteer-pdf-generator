@@ -3,7 +3,7 @@ const fs = require("fs");
 const puppeteer = require("puppeteer");
 
 module.exports = async (res, url) => {
-  const filePath = "./output.pdf";
+  const filePath = "output.pdf";
 
   const browser = await puppeteer.launch({
     args: [
