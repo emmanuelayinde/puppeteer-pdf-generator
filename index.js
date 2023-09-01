@@ -10,14 +10,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 const _PORT_ = 8080;
 
 app.get("/", async (_, res) => {
-  res.send(`Welcome to Puppeteer website to pdf generator, to generate a new PDF from a URL, kindly navigate to the /generate-pdf route with POST method and your url as the body param.`);
+  res.send(
+    `Welcome to Puppeteer website to pdf generator, to generate a new PDF from a URL, kindly navigate to the /generate-pdf route with POST method and your url as the body param.`,
+  );
 });
 
 app.post("/generate-pdf", async (req, res) => {
-  const newPDF = await generatePdf(req.body.url);
-
-  //   res.download(newPDF)
-  res.json({ pdf: newPDF });
+  await generatePdf(res, req.body.url);
 });
 
 app.listen(_PORT_, () => {

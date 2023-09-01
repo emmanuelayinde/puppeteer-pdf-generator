@@ -1,11 +1,14 @@
-FROM node:alpine
+FROM ghcr.io/puppeteer/puppeteer:21.1.1
 
-COPY . /app
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
+    PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable
 
-WORKDIR /app
+WORKDIR /usr/src/app
 
-RUN npm install
+COPY package*.json ./
 
-EXPOSE 8080
+RUN npm ci
+
+COPY . .
 
 CMD [ "node", "index.js" ] 
