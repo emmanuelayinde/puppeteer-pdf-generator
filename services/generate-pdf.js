@@ -1,9 +1,8 @@
 require("dotenv").config();
 const puppeteer = require("puppeteer");
-const path = require("path");
 
 module.exports = async (res, url) => {
-  const PDFPath = path.resolve(__dirname, "../files/output.pdf");
+  const PDFPath = "/output.pdf";
 
   const browser = await puppeteer.launch({
     args: [
@@ -21,8 +20,8 @@ module.exports = async (res, url) => {
     const page = await browser.newPage();
     await page.goto(url);
     await page.pdf({ path: PDFPath, format: "A4" });
-    console.log('Done converting to PDF.')
-    console.log({PDFPath})
+    console.log("Done converting to PDF.");
+    console.log({ PDFPath });
     // res.json({ PDF: PDFPath });
     res.download(PDFPath);
   } catch (error) {
